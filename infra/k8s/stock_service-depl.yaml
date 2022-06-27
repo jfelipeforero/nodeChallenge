@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock-service-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stock-service
+  template:
+    metadata:
+      labels:
+        app: stock-service
+    spec:
+      containers:
+        - name: stock-service
+          image: jfelipef/stock-service
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://stock-service-mongo-srv:27017/stock-service'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock-service-srv
+spec:
+  selector:
+    app: stock-service
+  ports:
+    - name: stock-service
+      protocol: TCP
+      port: 5555
+      targetPort: 5555

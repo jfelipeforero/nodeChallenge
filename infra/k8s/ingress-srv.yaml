@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: nodechallenge.com
+      http:
+        paths:
+          - path: /api/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: api-service-srv
+                port:
+                  number: 5555
+          - path: /stock/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: stock-service-srv
+                port:
+                  number: 5555
