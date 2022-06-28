@@ -1,7 +1,7 @@
 import express from 'express';
 import { body } from 'express-validator';
 import { validateRequest } from '../middlewares/validate-request';
-import { register } from '../controllers';
+import { register } from '../controllers/register.controller';
 
 const router = express.Router();
 

@@ -30,7 +30,7 @@ const register = async (req: Request, res: Response) => {
     jwt: userJWT,
   };
 
-  res.status(StatusCodes.CREATED).send({ email: user.email, password, user });
+  res.status(StatusCodes.CREATED).send({ email: user.email, password });
 };
 
 export { register };

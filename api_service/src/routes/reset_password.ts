@@ -1,7 +1,7 @@
 import express from 'express';
 import { body } from 'express-validator';
 import { requireAuth } from '../middlewares/require-auth';
-import { resetPassword } from '../controllers';
+import { resetPassword } from '../controllers/reset_password.controller';
 
 const router = express.Router();
 
