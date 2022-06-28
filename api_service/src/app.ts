@@ -2,14 +2,7 @@ import express, { json } from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
 
-import {
-  signupRouter,
-  signoutRouter,
-  requestStockRouter,
-  userHistoryRouter,
-  statsRouter,
-  resetPasswordRouter,
-} from './routes';
+import * as routes from './routes';
 import { errorHandler } from './middlewares/error-handler';
 import { NotFoundError } from './errors';
 import { currentUser } from './middlewares/current-user';
@@ -28,12 +21,12 @@ app.use(
 app.use(currentUser);
 
 app.use(
-  signupRouter,
-  signoutRouter,
-  requestStockRouter,
-  userHistoryRouter,
-  statsRouter,
-  resetPasswordRouter
+  routes.signupRouter,
+  routes.signoutRouter,
+  routes.requestStockRouter,
+  routes.userHistoryRouter,
+  routes.statsRouter,
+  routes.resetPasswordRouter
 );
 
 app.all('*', async (req, res) => {
